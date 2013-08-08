@@ -8,10 +8,10 @@ Item::Item(const string& title, const string& artist)
 	this->artist	= artist;
 	
 	contrib			= new set<string>();
-	contrib->insert("nobody");
+//	contrib->insert("nobody");
 
 	keywrd			= new set<string>();
-	keywrd->insert("none");
+//	keywrd->insert("none");
 }
 
 Item::Item()
@@ -21,10 +21,10 @@ Item::Item()
 	artist = "";
 
 	contrib			= new set<string>();
-	contrib->insert("nobody");
+//	contrib->insert("nobody");
 
 	keywrd			= new set<string>();
-	keywrd->insert("none");
+//	keywrd->insert("none");
 }
 
 Item::~Item()
@@ -51,6 +51,30 @@ set<string>* Item::getContrib()
 set<string>* Item::getKeywrd()
 {
 	return this->keywrd;
+}
+
+void Item::addContrib(int n_args, ...)
+{
+	// TODO: Check if this works
+	va_list arrrg;
+    va_start(arrrg, n_args);
+    for(int i = 0; i < n_args; i++) {
+		string cur = va_arg(arrrg, string);
+		contrib->insert(cur);
+    }
+    va_end(arrrg);
+}
+
+void Item::addKeywrd(int n_args, ...)
+{
+	// TODO: Check if this works
+	va_list arrrg;
+    va_start(arrrg, n_args);
+    for(int i = 0; i < n_args; i++) {
+		string cur = va_arg(arrrg, string);
+		keywrd->insert(cur);
+    }
+    va_end(arrrg);
 }
 
 bool operator<(const Item& i1, const Item& i2)

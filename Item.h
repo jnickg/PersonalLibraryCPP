@@ -3,6 +3,7 @@
 #include <ostream>
 #include <set>
 #include <string>
+#include <stdarg.h>
 
 using namespace std;
 
@@ -22,6 +23,9 @@ public:
 	string& getArtist();
 	set<string>* getContrib();
 	set<string>* getKeywrd();
+
+	void addContrib(int n_args, ...);	// args should be string
+	void addKeywrd(int n_args, ...);	// arts should be string
 };
 
 // You can't store Item* in an ItemSet, because that would disable the automatic
