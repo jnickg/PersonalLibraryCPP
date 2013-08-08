@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     ostream&	out(cout);		// output stream we'll be using
     const Item	*item;
 
-    out << "CS261 - Assignment 4 - I. Forgot" << endl << endl;
+    out << "CS261 - Assignment 4 - Nick Giampietro" << endl << endl;
 
 	// create library instance
 	library = new Library();

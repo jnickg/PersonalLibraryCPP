@@ -9,9 +9,19 @@ using namespace std;
 class Item
 {
 public:
+	string		title;
+	string		artist;
+	set<string>	*contrib;
+	set<string>	*keywrd;
+
 	Item(const string& title, const string& artist);
 	Item();
 	virtual ~Item();
+
+	string& getTitle();
+	string& getArtist();
+	set<string>* getContrib();
+	set<string>* getKeywrd();
 };
 
 // You can't store Item* in an ItemSet, because that would disable the automatic
