@@ -22,6 +22,21 @@ Book::~Book(void)
 
 ostream& operator<<(ostream& out, const Book* const book)
 {
+	string	kwrd;
+	// Is this for each loop correct?
+	bool	first = true;
+	for(string s: *book->keywrd)
+	{
+		kwrd.append(first ? "" : ", ");
+		kwrd.append(s);
+	}
+	out
+		<< "-Book-\n"
+		<< "author:   " << book->artist << "\n"
+		<< "# pages:  " << book->pages << "\n"
+		<< "title:    " << book->title << "\n"
+		<< "keywords: " << kwrd 
+		<< endl;
 	// your code here
 	// toString, basically
 	return out;

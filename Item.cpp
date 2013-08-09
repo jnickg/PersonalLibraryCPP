@@ -119,6 +119,21 @@ bool operator<(const ItemPtr& ip1, const ItemPtr& ip2)
 
 ostream& operator<<(ostream& out, const Item* const item)
 {
+	string	kwrd;
+	// Is this for each loop correct?
+	bool	first = true;
+	for(string s: *item->keywrd)
+	{
+		kwrd.append(first ? "" : ", ");
+		kwrd.append(s);
+		if (first) first=false;
+	}
+	out
+	<< "-Item-\n"
+	<< "artist:   " << item->artist << "\n"
+	<< "title:    " << item->title << "\n"
+	<< "keywords: " << kwrd 
+	<< endl;
 	// your code here
 	// toString, basically
 	return out;

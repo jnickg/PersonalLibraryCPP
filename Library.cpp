@@ -11,11 +11,13 @@ void Library::addKeywordsForItem(const Item* const item, int nKeywords, ...)
 
 	va_list		keywords;
 	char		*keyword;
+	string		kw;
 
 	va_start(keywords, nKeywords);
 	for (int i = 0; i < nKeywords; i++) {
 		keyword = va_arg(keywords, char*);
-		// do something with each keyword
+		kw = keyword;
+		item->keywrd->insert(kw);
 		}
 	va_end(keywords);
 }
@@ -34,7 +36,7 @@ const Item* Library::addBook(const string& title, const string& author, const in
 	Item	*book = new Book(title, author, nPages);
 	bookS.insert(book);
 	// Create relevant maps, and add to those as well.
-	return NULL;
+	return book;
 }
 
 const ItemSet* Library::booksByAuthor(const string& author) const
