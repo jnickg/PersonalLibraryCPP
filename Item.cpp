@@ -120,5 +120,6 @@ bool operator<(const ItemPtr& ip1, const ItemPtr& ip2)
 ostream& operator<<(ostream& out, const Item* const item)
 {
 	// your code here
+	// toString, basically
 	return out;
 }

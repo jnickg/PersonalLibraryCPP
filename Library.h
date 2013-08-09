@@ -6,6 +6,7 @@
 #include <set>
 #include <string>
 #include "Item.h"
+#include "Book.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ typedef map<string,ItemSet*>	StringToItemSetMap;
 class Library
 {
 private:
-
+	ItemSet		bookS, albumS, movieS;
 public:
 	// general functions
 	void addKeywordsForItem(const Item* const item, int nKeywords, ...);

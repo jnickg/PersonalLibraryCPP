@@ -30,7 +30,10 @@ const ItemSet* Library::itemsForKeyword(const string& keyword) const
 
 const Item* Library::addBook(const string& title, const string& author, const int nPages)
 {
-	// your code here
+	// Might be incomplete
+	Item	*book = new Book(title, author, nPages);
+	bookS.insert(book);
+	// Create relevant maps, and add to those as well.
 	return NULL;
 }
 
