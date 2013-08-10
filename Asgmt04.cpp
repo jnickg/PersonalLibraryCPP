@@ -51,6 +51,11 @@ int main(int argc, char **argv)
         library->addKeywordsForItem(item, 3, "sixties", "gonzo", "drugs");
 		out << item << endl;
         }
+
+	// DELETE
+	 printItemSet(out, library->booksByAuthor("Robert A. Heinlein"));
+	// DELETE
+
     item = library->addMusicAlbum("Europe In '72", "Grateful Dead", 12);
     if (item != NULL) {
         library->addKeywordsForItem(item, 4, "acid rock", "sixties", "jam bands", "cosmic");

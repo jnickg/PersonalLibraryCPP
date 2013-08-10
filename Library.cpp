@@ -18,14 +18,44 @@ void Library::addKeywordsForItem(const Item* const item, int nKeywords, ...)
 		keyword = va_arg(keywords, char*);
 		kw = keyword;
 		item->keywrd->insert(kw);
+		addToMap(keywordM, item, 1, kw);
 		}
 	va_end(keywords);
 }
 
 const ItemSet* Library::itemsForKeyword(const string& keyword) const
 {
-	// your code here
-	return NULL;
+	if(keywordM.find(keyword) != keywordM.end())
+	{
+		return NULL;
+		//return keywordM[keyword];
+	}
+	else return NULL;
+}
+
+void addToMap(const STIMap &map, const Item* const val, int n_args, ...)
+{
+	// cur is current argument being used in the looop
+	// val is the item to be inserted into the map
+	// map is the map
+	va_list arrrg;
+    va_start(arrrg, n_args);
+    for(int i = 0; i < n_args; i++) {
+		string cur = va_arg(arrrg, string);
+		if (map.find(cur) != map.end())
+		{
+			//ItemSet *vis = map[cur];
+			//vis->insert(val);
+			//map[cur] = vis;
+		}
+		else
+		{
+			//ItemSet *vis = new ItemSet;
+			//vis->insert(val);
+			//map[cur] = vis;
+		}
+    }
+    va_end(arrrg);
 }
 
 // book-related functions
@@ -34,6 +64,7 @@ const Item* Library::addBook(const string& title, const string& author, const in
 {
 	Item	*book = new Book(title, author, nPages);
 	bookS.insert(book);
+	addToMap(artistM, book, 1, author);
 	// Create relevant maps, and add to those as well.
 	return book;
 }
@@ -111,7 +142,7 @@ const ItemSet* Library::movies() const
 	return NULL;
 }
 
-static void deleteMapContents(StringToItemSetMap& s2ism)
+static void deleteMapContents(STIMap& s2ism)
 {
 	// your code here
 }
