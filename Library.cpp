@@ -17,7 +17,7 @@ void Library::addKeywordsForItem(const Item* const item, int nKeywords, ...)
 	{
 		keyword = va_arg(keywords, char*);
 		item->getKeywrd()->insert(keyword);
-		addToMap(keywordM, item, 1, keyword);
+		//addToMap(keywordM, item, 1, keyword);
 	}
 	va_end(keywords);
 }
@@ -33,7 +33,7 @@ const ItemSet* Library::itemsForKeyword(const string& keyword) const
 }
 
 // Should second parameter be ItemPtr or Item*?
-void addToMap(STIMap &map, const ItemPtr val, int n_args, ...)
+void addToMap(STIMap &map, const ItemPtr &val, int n_args, ...)
 {
 	//cur is current argument being used in the looop
 	//val is the item to be inserted into the map

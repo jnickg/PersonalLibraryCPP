@@ -113,6 +113,7 @@ bool operator<(const ItemPtr& ip1, const ItemPtr& ip2)
 // Make this virtual so that correct << operator gets called?
 ostream& operator<<(ostream& out, const Item* const item)
 {
+	// Format keywords, from getKeywrd() return type (set<string>)
 	string	kwrd;
 	bool	first = true;
 	for(string s: *item->getKeywrd())
@@ -121,6 +122,7 @@ ostream& operator<<(ostream& out, const Item* const item)
 		kwrd.append(s);
 		if (first) first=false;
 	}
+
 	out
 	<< "-Item-\n"
 	<< "artist:   " << item->getArtist() << "\n"

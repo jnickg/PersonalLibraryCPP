@@ -53,7 +53,9 @@ int main(int argc, char **argv)
         }
 
 	// DELETE
-	 printItemSet(out, library->booksByAuthor("Robert A. Heinlein"));
+	//out << ">>> books:" << endl << endl;
+    //printItemSet(out, library->books());
+	printItemSet(out, library->booksByAuthor("Robert A. Heinlein"));
 	// DELETE
 
     item = library->addMusicAlbum("Europe In '72", "Grateful Dead", 12);
