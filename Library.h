@@ -24,7 +24,7 @@ public:
 	// general functions
 	void addKeywordsForItem(const Item* const item, int nKeywords, ...);
 	const ItemSet* itemsForKeyword(const string& keyword) const;
-	void addToMap(const STIMap &map, const Item* const val, int n_args, ...);
+	void addToMap(STIMap &map, const ItemPtr val, int n_args, ...);
 	// book-related functions
 	const Item* addBook(const string& title, const string& author, const int nPages);
 	const ItemSet* booksByAuthor(const string& author) const;

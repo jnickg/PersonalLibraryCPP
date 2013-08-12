@@ -20,20 +20,24 @@ Book::~Book(void)
 
 }
 
+int Book::getPages() const {
+	return pages;
+}
+
 ostream& operator<<(ostream& out, const Book* const book)
 {
 	string	kwrd;
 	bool	first = true;
-	for(string s: *book->keywrd)
+	for(string s: *book->getKeywrd())
 	{
 		kwrd.append(first ? "" : ", ");
 		kwrd.append(s);
 	}
 	out
 		<< "-Book-\n"
-		<< "author:   " << book->artist << "\n"
-		<< "# pages:  " << book->pages << "\n"
-		<< "title:    " << book->title << "\n"
+		<< "author:   " << book->getArtist() << "\n"
+		<< "# pages:  " << book->getPages() << "\n"
+		<< "title:    " << book->getTitle() << "\n"
 		<< "keywords: " << kwrd 
 		<< endl;
 	return out;

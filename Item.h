@@ -9,20 +9,21 @@ using namespace std;
 
 class Item
 {
-public:
+private:
 	string		title;
 	string		artist;
 	set<string>	*contrib;
 	set<string>	*keywrd;
+public:
 
 	Item(const string& title, const string& artist);
 	Item();
 	virtual ~Item();
 
-	string& getTitle();
-	string& getArtist();
-	set<string>* getContrib();
-	set<string>* getKeywrd();
+	string getTitle() const;
+	string getArtist() const;
+	set<string>* getContrib() const;
+	set<string>* getKeywrd() const;
 
 	void addContrib(int n_args, ...);	// args should be string
 	void addKeywrd(int n_args, ...);	// arts should be string
@@ -47,10 +48,10 @@ public:
 // The STL's set class will internally generate an instance of ItemPtr
 // which will contain the pointer to the instance of Book.
 
+// Wrapper class for an actual Item
 class ItemPtr
 {
 private:
-	// Wrapper class for an actual Item
 	Item	*ptr;
 public:
 	ItemPtr(Item *ptr) : ptr(ptr) { }

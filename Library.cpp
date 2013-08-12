@@ -8,18 +8,16 @@
 void Library::addKeywordsForItem(const Item* const item, int nKeywords, ...)
 {
 	// the code in this function demonstrates how to handle a vararg in C++
-
 	va_list		keywords;
-	char		*keyword;
-	string		kw;
+	//char		*keyword;
+	string		keyword;
 
 	va_start(keywords, nKeywords);
 	for (int i = 0; i < nKeywords; i++)
 	{
 		keyword = va_arg(keywords, char*);
-		kw = keyword;
-		item->keywrd->insert(kw);
-		//addToMap(keywordM, item, 1, kw);
+		item->getKeywrd()->insert(keyword);
+		addToMap(keywordM, item, 1, keyword);
 	}
 	va_end(keywords);
 }
@@ -34,7 +32,8 @@ const ItemSet* Library::itemsForKeyword(const string& keyword) const
 	else return NULL;
 }
 
-void addToMap(const STIMap &map, const Item* const val, int n_args, ...)
+// Should second parameter be ItemPtr or Item*?
+void addToMap(STIMap &map, const ItemPtr val, int n_args, ...)
 {
 	//cur is current argument being used in the looop
 	//val is the item to be inserted into the map
@@ -45,15 +44,15 @@ void addToMap(const STIMap &map, const Item* const val, int n_args, ...)
 		string cur = va_arg(arrrg, string);
 		if (map.find(cur) != map.end())
 		{
-			//ItemSet *vis = map[cur];
-			//vis->insert(val);
-			//map[cur] = vis;
+			ItemSet *vis = map[cur];
+			vis->insert(val);
+			map[cur] = vis;
 		}
 		else
 		{
-			//ItemSet *vis = new ItemSet;
-			//vis->insert(val);
-			//map[cur] = vis;
+			ItemSet *vis = new ItemSet;
+			vis->insert(val);
+			map[cur] = vis;
 		}
     }
     va_end(arrrg);
@@ -66,7 +65,6 @@ const Item* Library::addBook(const string& title, const string& author, const in
 	Item	*book = new Book(title, author, nPages);
 	bookS.insert(book);
 	//addToMap(artistM, book, 1, author);
-	// Create relevant maps, and add to those as well.
 	return book;
 }
 
@@ -78,6 +76,8 @@ const ItemSet* Library::booksByAuthor(const string& author) const
 
 const ItemSet* Library::books() const
 {
+	// TODO: is there a problem witht he way this returns?
+	// (const ItemSet* == &bookS) ? no : yes
 	return &bookS;
 }
 

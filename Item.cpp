@@ -8,10 +8,8 @@ Item::Item(const string& title, const string& artist)
 	this->artist	= artist;
 	
 	contrib			= new set<string>();
-//	contrib->insert("nobody");
 
 	keywrd			= new set<string>();
-//	keywrd->insert("none");
 }
 
 Item::Item()
@@ -21,10 +19,8 @@ Item::Item()
 	artist = "";
 
 	contrib			= new set<string>();
-//	contrib->insert("nobody");
 
 	keywrd			= new set<string>();
-//	keywrd->insert("none");
 }
 
 Item::~Item()
@@ -33,22 +29,22 @@ Item::~Item()
 	delete keywrd;
 }
 
-string& Item::getTitle()
+string Item::getTitle() const
 {
 	return this->title;
 }
 
-string& Item::getArtist()
+string Item::getArtist() const
 {
 	return this->artist;
 }
 
-set<string>* Item::getContrib()
+set<string>* Item::getContrib() const
 {
 	return this->contrib;
 }
 
-set<string>* Item::getKeywrd()
+set<string>* Item::getKeywrd() const
 {
 	return this->keywrd;
 }
@@ -77,12 +73,10 @@ void Item::addKeywrd(int n_args, ...)
 
 bool operator<(const Item& i1, const Item& i2)
 {
-	// TODO: ask about how to access private members
-	// rather than just doing i1.title
-	string	t1 = i1.title;
-	string	t2 = i2.title;
-	string	a1 = i1.artist;
-	string	a2 = i2.artist;
+	string	t1 = i1.getTitle();
+	string	t2 = i2.getTitle();
+	string	a1 = i1.getArtist();
+	string	a2 = i2.getArtist();
 	bool	rtn;
 	int		cmp = t1.compare(t2);
 
@@ -116,11 +110,12 @@ bool operator<(const ItemPtr& ip1, const ItemPtr& ip2)
 	else return false;
 }
 
+// Make this virtual so that correct << operator gets called?
 ostream& operator<<(ostream& out, const Item* const item)
 {
 	string	kwrd;
 	bool	first = true;
-	for(string s: *item->keywrd)
+	for(string s: *item->getKeywrd())
 	{
 		kwrd.append(first ? "" : ", ");
 		kwrd.append(s);
@@ -128,8 +123,8 @@ ostream& operator<<(ostream& out, const Item* const item)
 	}
 	out
 	<< "-Item-\n"
-	<< "artist:   " << item->artist << "\n"
-	<< "title:    " << item->title << "\n"
+	<< "artist:   " << item->getArtist() << "\n"
+	<< "title:    " << item->getTitle() << "\n"
 	<< "keywords: " << kwrd 
 	<< endl;
 	return out;

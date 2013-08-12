@@ -5,8 +5,10 @@
 class Book :
 	public Item
 {
-public:
+private:
 	int			pages;
+public:
+	int getPages() const;
 
 	Book(void);
 	Book(const string& title, const string& author, const int nPages);
