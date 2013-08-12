@@ -55,7 +55,6 @@ set<string>* Item::getKeywrd()
 
 void Item::addContrib(int n_args, ...)
 {
-	// TODO: Check if this works
 	va_list arrrg;
     va_start(arrrg, n_args);
     for(int i = 0; i < n_args; i++) {
@@ -67,7 +66,6 @@ void Item::addContrib(int n_args, ...)
 
 void Item::addKeywrd(int n_args, ...)
 {
-	// TODO: Check if this works
 	va_list arrrg;
     va_start(arrrg, n_args);
     for(int i = 0; i < n_args; i++) {
@@ -79,7 +77,8 @@ void Item::addKeywrd(int n_args, ...)
 
 bool operator<(const Item& i1, const Item& i2)
 {
-	// TODO: ask Boff about how to access private members
+	// TODO: ask about how to access private members
+	// rather than just doing i1.title
 	string	t1 = i1.title;
 	string	t2 = i2.title;
 	string	a1 = i1.artist;
@@ -120,7 +119,6 @@ bool operator<(const ItemPtr& ip1, const ItemPtr& ip2)
 ostream& operator<<(ostream& out, const Item* const item)
 {
 	string	kwrd;
-	// Is this for each loop correct?
 	bool	first = true;
 	for(string s: *item->keywrd)
 	{
@@ -134,7 +132,5 @@ ostream& operator<<(ostream& out, const Item* const item)
 	<< "title:    " << item->title << "\n"
 	<< "keywords: " << kwrd 
 	<< endl;
-	// your code here
-	// toString, basically
 	return out;
 }

@@ -11,9 +11,9 @@
 using namespace std;
 
 // C++ Standard Library definitions for containers you may need
-typedef set<string>				StringSet;
-typedef set<ItemPtr>			ItemSet;				// see comment in Item.h about use of ItemPtr
-typedef map<string,ItemSet*>	STIMap;
+typedef set<string>				StringSet;	// Great!
+typedef set<ItemPtr>			ItemSet;	// see comment in Item.h about use of ItemPtr
+typedef map<string,ItemSet*>	STIMap;	// Map of sexually-transmitted infections
 
 class Library
 {

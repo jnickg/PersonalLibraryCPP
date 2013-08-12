@@ -50,8 +50,8 @@ public:
 class ItemPtr
 {
 private:
+	// Wrapper class for an actual Item
 	Item	*ptr;
-
 public:
 	ItemPtr(Item *ptr) : ptr(ptr) { }
 	Item* getPtr() const { return ptr; }
