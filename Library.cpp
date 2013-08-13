@@ -9,15 +9,22 @@ void Library::addKeywordsForItem(const Item* const item, int nKeywords, ...)
 {
 	// the code in this function demonstrates how to handle a vararg in C++
 	va_list		keywords;
-	//char		*keyword;
-	string		keyword;
+	char		*keyword;
+	string		kw;
+
+	// Necessary to pass the const Item* const item
+	// as an argument in addToMap, in the below for loop
+	Item* thisItem = const_cast<Item *>(item);
 
 	va_start(keywords, nKeywords);
 	for (int i = 0; i < nKeywords; i++)
 	{
 		keyword = va_arg(keywords, char*);
-		item->getKeywrd()->insert(keyword);
-		addToMap(keywordM, *item, 1, keyword);
+		kw = keyword;
+		item->getKeywrd()->insert(kw);
+
+		//passing through thisItem doesn't work; causes unhandled exception.
+		addToMap(keywordM, *thisItem, 1, keyword);
 	}
 	va_end(keywords);
 }
@@ -26,18 +33,16 @@ const ItemSet* Library::itemsForKeyword(const string& keyword) const
 {
 	if(keywordM.find(keyword) != keywordM.end())
 	{
-		return NULL;
-		//return keywordM[keyword];
+		return keywordM[keyword];
 	}
 	else return NULL;
 }
 
-// Should second parameter be ItemPtr or Item*?
-void Library::addToMap(STIMap &map, const Item* const val, int n_args, ...)
+void Library::addToMap(STIMap &map, Item &val, int n_args, ...)
 {
 	//cur is current argument being used in the looop
 	//val is the item to be inserted into the map
-	//map is the map
+	//map is the map to be modified
 	va_list arrrg;
     va_start(arrrg, n_args);
     for(int i = 0; i < n_args; i++) {
@@ -45,13 +50,13 @@ void Library::addToMap(STIMap &map, const Item* const val, int n_args, ...)
 		if (map.find(cur) != map.end())
 		{
 			ItemSet *vis = map[cur];
-			vis->insert(val);
+			vis->insert(&val);
 			map[cur] = vis;
 		}
 		else
 		{
 			ItemSet *vis = new ItemSet;
-			vis->insert(val);
+			vis->insert(&val);
 			map[cur] = vis;
 		}
     }
@@ -64,14 +69,13 @@ const Item* Library::addBook(const string& title, const string& author, const in
 {
 	Item	*book = new Book(title, author, nPages);
 	bookS.insert(book);
-	addToMap(artistM, book, 1, author);
+	addToMap(boArtist, *book, 1, author);
 	return book;
 }
 
 const ItemSet* Library::booksByAuthor(const string& author) const
 {
-	// your code here
-	return NULL;
+	return boArtist[author];
 }
 
 const ItemSet* Library::books() const

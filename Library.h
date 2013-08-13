@@ -18,13 +18,16 @@ typedef map<string,ItemSet*>	STIMap;	// Map of sexually-transmitted infections
 class Library
 {
 private:
-	ItemSet		bookS, albumS, movieS;
-	STIMap		keywordM, artistM, contributorM;
+	mutable ItemSet		bookS, albumS, movieS;
+	mutable STIMap		keywordM, // Keyword map for whole library
+						boArtist, // Artist map for books
+						muArtist, muContrib, // Artist, Contributor maps for music albums
+						moArtist, moContrib; // Artist, Contributor maps for movies
 public:
 	// general functions
 	void addKeywordsForItem(const Item* const item, int nKeywords, ...);
 	const ItemSet* itemsForKeyword(const string& keyword) const;
-	void addToMap(STIMap &map, const Item* const val, int n_args, ...);
+	void addToMap(STIMap &map, Item &val, int n_args, ...);
 
 	// book-related functions
 	const Item* addBook(const string& title, const string& author, const int nPages);
