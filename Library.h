@@ -28,6 +28,7 @@ public:
 	void addKeywordsForItem(const Item* const item, int nKeywords, ...);
 	const ItemSet* itemsForKeyword(const string& keyword) const;
 	void addToMap(STIMap &map, Item &val, int n_args, ...);
+	void addToMapc(STIMap &map, const Item* const val, int n_args, ...);
 
 	// book-related functions
 	const Item* addBook(const string& title, const string& author, const int nPages);

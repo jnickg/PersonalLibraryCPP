@@ -14,7 +14,7 @@ void Library::addKeywordsForItem(const Item* const item, int nKeywords, ...)
 
 	// Necessary to pass the const Item* const item
 	// as an argument in addToMap, in the below for loop
-	Item* thisItem = const_cast<Item *>(item);
+	// Item* thisItem = (Item*)const_cast<Item *>(item);
 
 	va_start(keywords, nKeywords);
 	for (int i = 0; i < nKeywords; i++)
@@ -23,8 +23,12 @@ void Library::addKeywordsForItem(const Item* const item, int nKeywords, ...)
 		kw = keyword;
 		item->getKeywrd()->insert(kw);
 
-		//passing through thisItem doesn't work; causes unhandled exception.
-		addToMap(keywordM, *thisItem, 1, keyword);
+		// passing through thisItem doesn't work; causes unhandled exception.
+		// addToMap(keywordM, *thisItem, 1, keyword);
+		
+		// Works on this side but doesn't allow "item" to be inserted into
+		// ItemSet (inside addToMapc).
+		addToMapc(keywordM, item, 1, keyword);
 	}
 	va_end(keywords);
 }
@@ -36,6 +40,31 @@ const ItemSet* Library::itemsForKeyword(const string& keyword) const
 		return keywordM[keyword];
 	}
 	else return NULL;
+}
+
+void Library::addToMapc(STIMap &map, const Item* const val, int n_args, ...)
+{
+	//cur is current argument being used in the looop
+	//val is the item to be inserted into the map
+	//map is the map to be modified
+	va_list arrrg;
+    va_start(arrrg, n_args);
+    for(int i = 0; i < n_args; i++) {
+		string cur = va_arg(arrrg, string);
+		if (map.find(cur) != map.end())
+		{
+			ItemSet *vis = map[cur];
+			vis->insert(*val);
+			map[cur] = vis;
+		}
+		else
+		{
+			ItemSet *vis = new ItemSet;
+			vis->insert(&val);
+			map[cur] = vis;
+		}
+    }
+    va_end(arrrg);
 }
 
 void Library::addToMap(STIMap &map, Item &val, int n_args, ...)
