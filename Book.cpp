@@ -24,6 +24,12 @@ int Book::getPages() const {
 	return pages;
 }
 
+ostream& Book::print(ostream& out) const
+{
+	out << this;
+	return out;
+}
+
 ostream& operator<<(ostream& out, const Book* const book)
 {
 	string	kwrd;
@@ -32,6 +38,7 @@ ostream& operator<<(ostream& out, const Book* const book)
 	{
 		kwrd.append(first ? "" : ", ");
 		kwrd.append(s);
+		if (first) first=false;
 	}
 	out
 		<< "-Book-\n"

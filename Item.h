@@ -25,6 +25,8 @@ public:
 	set<string>* getContrib() const;
 	set<string>* getKeywrd() const;
 
+	virtual ostream& print(ostream& out) const = 0;
+
 	void addContrib(int n_args, ...);	// args should be string
 	void addKeywrd(int n_args, ...);	// arts should be string
 };

@@ -71,6 +71,12 @@ void Item::addKeywrd(int n_args, ...)
     va_end(arrrg);
 }
 
+ostream& Item::print(ostream& out) const
+{
+	out << this;
+	return out;
+}
+
 bool operator<(const Item& i1, const Item& i2)
 {
 	string	t1 = i1.getTitle();
@@ -113,22 +119,31 @@ bool operator<(const ItemPtr& ip1, const ItemPtr& ip2)
 // Make this virtual so that correct << operator gets called?
 ostream& operator<<(ostream& out, const Item* const item)
 {
-	// Format keywords, from getKeywrd() return type (set<string>)
-	string	kwrd;
-	bool	first = true;
-	for(string s: *item->getKeywrd())
-	{
-		kwrd.append(first ? "" : ", ");
-		kwrd.append(s);
-		if (first) first=false;
-	}
+	item->print(out);
+	//if(typeid(*item).name() == "Book")
+	//{
+	//	//turn it into a book and do
+	//	//out << book;
+	//	//return out;
+	//}
 
-	out
-	<< "-Item-\n"
-	<< "artist:   " << item->getArtist() << "\n"
-	<< "title:    " << item->getTitle() << "\n"
-	<< "keywords: " << kwrd 
-	<< endl;
+
+	// Format keywords, from getKeywrd() return type (set<string>)
+	//string	kwrd;
+	//bool	first = true;
+	//for(string s: *item->getKeywrd())
+	//{
+	//	kwrd.append(first ? "" : ", ");
+	//	kwrd.append(s);
+	//	if (first) first=false;
+	//}
+	//out
+	//<< "-Item-\n"
+	//<< "artist:   " << item->getArtist() << "\n"
+	//<< "title:    " << item->getTitle() << "\n"
+	//<< "keywords: " << kwrd 
+	//<< endl;
+	
 	return out;
 }
 
