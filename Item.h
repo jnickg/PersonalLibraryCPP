@@ -15,7 +15,6 @@ private:
 	set<string>	*contrib;
 	set<string>	*keywrd;
 public:
-
 	Item(const string& title, const string& artist);
 	Item();
 	virtual ~Item();

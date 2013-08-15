@@ -218,18 +218,33 @@ const ItemSet* Library::movies() const
 	return &movieS;
 }
 
-static void deleteMapContents(STIMap& s2ism)
-{
-	// your code here
-}
-
 static void deleteItemSetContents(ItemSet& itemSet)
 {
-	// your code here
+	itemSet.clear();
+}
+
+static void deleteMapContents(STIMap& s2ism)
+{
+	// Delete contents of s2ism->V (which is an ItemSet)
+	for(auto i: s2ism)
+	{
+		ItemSet *dis_itemSet = i.second;
+		deleteItemSetContents(*dis_itemSet);
+	}
+
+	s2ism.clear();
 }
 
 Library::~Library()
 {
-	// your code here
+	deleteItemSetContents(bookS);
+	deleteItemSetContents(albumS);
+	deleteItemSetContents(movieS);
+	deleteMapContents(keywordM);
+	deleteMapContents(boArtist);
+	deleteMapContents(muArtist);
+	deleteMapContents(moArtist);
+	deleteMapContents(moContrib);
+	deleteMapContents(muContrib);
 }
 

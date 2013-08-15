@@ -7,6 +7,7 @@ class MusicAlbum :
 {
 private:
 	int		songs;
+
 public:
 	int getSongs() const;
 	ostream& print(ostream& out) const;

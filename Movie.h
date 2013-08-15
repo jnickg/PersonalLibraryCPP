@@ -7,6 +7,7 @@ class Movie :
 {
 private:
 	int		scenes;
+
 public:
 	int getScenes() const;
 	ostream& print(ostream& out) const;
