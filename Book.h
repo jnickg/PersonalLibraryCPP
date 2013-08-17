@@ -7,6 +7,7 @@ class Book :
 {
 private:
 	int			pages;
+
 public:
 	int getPages() const;
 	ostream& print(ostream& out) const;

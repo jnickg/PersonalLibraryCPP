@@ -220,18 +220,20 @@ const ItemSet* Library::movies() const
 
 static void deleteItemSetContents(ItemSet& itemSet)
 {
+	for (auto i = itemSet.begin(); i != itemSet.end(); i++)
+	{
+		delete i->getPtr();
+	}
 	itemSet.clear();
 }
 
 static void deleteMapContents(STIMap& s2ism)
 {
-	// Delete contents of s2ism->V (which is an ItemSet)
-	for(auto i: s2ism)
+	for (auto i = s2ism.begin(); i != s2ism.end(); i++)
 	{
-		ItemSet *dis_itemSet = i.second;
-		deleteItemSetContents(*dis_itemSet);
+		ItemSet *is = i->second;
+		deleteItemSetContents(*is);
 	}
-
 	s2ism.clear();
 }
 
@@ -246,5 +248,19 @@ Library::~Library()
 	deleteMapContents(moArtist);
 	deleteMapContents(moContrib);
 	deleteMapContents(muContrib);
+
+	//bookS.clear();
+	//albumS.clear();
+	//movieS.clear();
+	
+	//delete &bookS;
+	//delete &albumS;
+	//delete &movieS;
+	//delete &keywordM;
+	//delete &boArtist;
+	//delete &muArtist;
+	//delete &moArtist;
+	//delete &muContrib;
+	//delete &moContrib;
 }
 

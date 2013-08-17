@@ -25,7 +25,9 @@ Item::Item()
 
 Item::~Item()
 {
+	contrib->clear();
 	delete contrib;
+	keywrd->clear();
 	delete keywrd;
 }
 
