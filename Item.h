@@ -17,7 +17,7 @@ private:
 public:
 	Item(const string& title, const string& artist);
 	Item();
-	virtual ~Item();
+	~Item();
 
 	string getTitle() const;
 	string getArtist() const;

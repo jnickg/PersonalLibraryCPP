@@ -52,7 +52,7 @@ ostream& operator<<(ostream& out, const Movie* const movie)
 
 	out
 		<< "-Movie-\n"
-		<< "author:   " << movie->getArtist() << "\n"
+		<< "director: " << movie->getArtist() << "\n"
 		<< "# scenes: " << movie->getScenes() << "\n"
 		<< "cast:     " << cntrb << "\n"
 		<< "title:    " << movie->getTitle() << "\n"

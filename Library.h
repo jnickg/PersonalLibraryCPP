@@ -32,6 +32,9 @@ public:
 	void addToMap(STIMap &map, Item &val, int n_args, ...);
 	// No longer needed, since addKeywordsForItem now does const_cast of item
 	//void addToMapc(STIMap &map, const Item* const val, int n_args, ...);
+	friend static void deleteItemSetContents(ItemSet& itemSet);
+	friend static void deleteItemSetContentsALT(ItemSet& itemSet);
+	friend static void deleteMapContents(STIMap& s2ism);
 
 	// book-related functions
 	const Item* addBook(const string& title, const string& author, const int nPages);

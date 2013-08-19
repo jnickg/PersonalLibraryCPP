@@ -52,7 +52,7 @@ ostream& operator<<(ostream& out, const MusicAlbum* const album)
 
 	out
 		<< "-Music Album-\n"
-		<< "author:   " << album->getArtist() << "\n"
+		<< "band:     " << album->getArtist() << "\n"
 		<< "# songs:  " << album->getSongs() << "\n"
 		<< "members:  " << cntrb << "\n"
 		<< "title:    " << album->getTitle() << "\n"
